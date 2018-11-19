@@ -1,0 +1,187 @@
+{% load static %}
+<!DOCTYPE html>
+<html dir="ltr" lang="en-US">
+<head><!-- Created by Artisteer v4.3.0.60858 -->
+    <meta charset="utf-8">
+    <title>Home</title>
+    <meta name="viewport" content="initial-scale = 1.0, maximum-scale = 1.0, user-scalable = no, width = device-width">
+
+    <!--[if lt IE 9]>
+    <script src="https://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link rel="stylesheet" href="{% static "style.css" %}" media="screen">
+    <!--[if lte IE 7]>
+    <link rel="stylesheet" href="{% static "style.ie7.css" %}" media="screen" />
+    <![endif]-->
+    <link rel="stylesheet" href="{% static "style.responsive.css" %}" media="all">
+    <script src="{% static "jquery.js" %}"></script>
+    <script src={% static "script.js" %}></script>
+    <script src="{% static "script.responsive.js" %}"></script>
+
+    <style>.art-content .art-postcontent-0 .layout-item-0 {
+        padding-right: 10px;
+        padding-left: 10px;
+    }
+
+    .ie7 .art-post .art-layout-cell {
+        border: none !important;
+        padding: 0 !important;
+    }
+
+    .ie6 .art-post .art-layout-cell {
+        border: none !important;
+        padding: 0 !important;
+    }
+
+    </style>
+</head>
+<body>
+<div id="art-main">
+    <div class="art-sheet clearfix">
+        <header class="art-header">
+            <div class="art-shapes"></div>
+            <h1 class="art-headline"><a href="/">Enter Your Comment</a>
+            </h1>
+            <div class="art-textblock art-object227400126">
+                <form class="art-search" name="Search" action="." method="GET">
+                    <input type="text" name="query" value="{{ query|escape }}">
+                    <input type="submit" value="Search" class="art-search-button">
+                </form>
+            </div>
+        </header>
+        <div class="art-layout-wrapper">
+            <div class="art-content-layout">
+                <div class="art-content-layout-row">
+                    <div class="art-layout-cell art-sidebar1">
+                        <div class="art-vmenublock clearfix">
+                            <div class="art-vmenublockheader">
+                                <h3 class="t">Others Topics</h3>
+                            </div>
+                            <div class="art-vmenublockcontent">
+                                <ul class="art-vmenu">
+                                    <li><a href="home.html" class="active">Tops</a>
+                                        <ul class="active">
+                                            {% if results %}
+                                                {% for book in results %}
+                                                    <li>
+                                                        <a href=" topics/{{ book }}">{{ book|escape }}</a>
+                                                    </li>
+                                                {% endfor %}
+                                            {% else %}
+                                                <li>There are not other topics yet</li>
+                                            {% endif %}
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="art-block clearfix">
+                            <div class="art-blockheader">
+                                <h5 class="t"><a href="contact.html">Create one</a></h5>
+                            </div>
+                            <div class="art-blockcontent"><h5>This is a site to you</h5>
+                                <br>
+                                <p>This is a web create it to everybody, you can make a new topic or just comment
+                                    another
+                                </p>
+                            </div>
+
+
+                            <div class="art_blockcontent">
+                                <hr>
+                                <P>Positive score(POS):{{ pscore }}</P>
+                                <P>Negative score(NEG):{{ nscore }}</P>
+                                <P>Neutral score:(NEU){{ nescore }}</P>
+                            </div>
+
+
+                            <div class="art-blockcontent">
+                                <hr>
+                                {% if busqueda %}
+                                    <h5>Related topics</h5>
+                                    {% for creators in results %}
+                                        <li>
+                                            <a href="{{ creators|escape }}">{{ creators|escape }}</a>
+                                        </li>
+                                    {% endfor %}
+                                {% endif %}
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="art-layout-cell art-content">
+                        <article class="art-post art-article">
+                            <h2 class="art-postheader">Home</h2>
+                            <div class="art-postcontent art-postcontent-0 clearfix">
+                                <div class="art-content-layout">
+                                    <div class="art-content-layout-row">
+                                        <div class="art-layout-cell layout-item-0" style="width: 100%">
+                                            <div class="image-caption-wrapper" style="width: 55%; float: left"><img
+                                                    alt="an image" style="width: 100%; max-width:420px"
+                                                    class="art-lightbox" src="{% static "images/write.png" %}">
+                                            </div>
+                                            <p>Dealing problem</p>
+                                            <div class="art-layout-cell layout-item-0" style="width: 50%">
+                                                <blockquote style="margin: 10px 0">
+                                                    {% if topic %}
+                                                        <p>{{ topic }}</p>
+                                                    {% else %}
+                                                        {# Default topic #}
+                                                        Nunc a sollicitudin est. Curabitur
+                                                        ullamcorper gravida felis, sit amet scelerisque lorem iaculis
+                                                        sed.
+                                                        Donec
+                                                        vel neque in neque porta venenatis sed sit amet lectus.
+                                                    {% endif %}
+                                                </blockquote>
+                                            </div>
+                                            {% if creatroCom %}
+                                                <p>Main opinion</p>
+                                                <p>{{ creatroCom }} </p>
+                                            {% endif %}
+                                            <p>Other people say</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="art-content-layout">
+                                    <div class="art-content-layout-row">
+                                        <div class="art-layout-cell layout-item-0" style="width: 50%">
+                                            <ul>
+                                                {#                                                {% if coments %}#}
+                                                {% for coment in coments %}
+                                                    <li>{{ coment.comment|escape }}<p>{{ coment.user }}</p></li>
+                                                {% endfor %}
+                                                {#                                                {% endif %}#}
+                                                {#                                                <li>Suspendisse pharetra auctor pharetra. Nunc a sollicitudin est.</li>#}
+                                                {#                                                <li>Donec vel neque in neque porta venenatis sed sit amet lectus.</li>#}
+                                                {#                                                <li>Curabitur ullamcorper gravida felis, sit amet scelerisque#}
+                                                {#                                                    loremiaculis sed.#}
+                                                {#                                                </li>#}
+                                                {#                                                <li> pharetra auctor pharetra. Nunc a sollicitudin est.<p>WTF</p></li>#}
+                                                {#                                                <li>Donec vel neque in neque porta venenatis sed sit amet lectus.</li>#}
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </article>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <footer class="art-footer">
+            {% block content %}
+                <form action="." method="POST" class="post-form">{% csrf_token %}
+                    {{ form.as_p }}
+                    <p><input type="submit" value="Submit"></p>
+                    {#                    <button type="submit" formmethod="post" class="save btn btn-default">Save</button>#}
+                </form>
+            {% endblock %}
+            <p>Proyecto final de Sistemas de la informacion</p>
+        </footer>
+    </div>
+</div>
+</body>
+</html>
